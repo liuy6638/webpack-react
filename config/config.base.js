@@ -5,7 +5,10 @@ module.exports = {
   entry: path.resolve(__dirname, "../src/index.jsx"),
   resolve: {
     // 设置扩展，这样导入文件时可以省去写扩展名
-    extensions: [".js", ".json", ".jsx"]
+    extensions: [".js", ".json", ".jsx"],
+    alias: {
+      'react-dom': '@hot-loader/react-dom'
+    }
   },
   module: {
     rules: [
