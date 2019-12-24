@@ -19,7 +19,7 @@ module.exports = {
         use: "eslint-loader"
       },
       {
-        test: /\.jsx?$/,
+        test: /\.jsx$/,
         include: path.resolve(__dirname, "../src"),
         use: "babel-loader"
       }

@@ -1,12 +1,12 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const merge = require("webpack-merge");
-const base = require("./config.base");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const TerserWebpackPlugin = require("terser-webpack-plugin");
 const OptimizeCssAssetsWebpackPlugin = require("optimize-css-assets-webpack-plugin");
 const webpack = require("webpack");
+const base = require("./webpack.common");
 
 module.exports = merge(base, {
   // 设置为生产（production）模式
@@ -70,7 +70,7 @@ module.exports = merge(base, {
       // 该插件还能压缩html
       new HtmlWebpackPlugin({
         template: path.resolve(__dirname, "../public/index.html"),
-        favicon: path.resolve(__dirname, "../public/favicon.png"),
+        favicon: path.resolve(__dirname, "../public/favicon.ico"),
         minify: {
           // 折叠空白符
           collapseWhitespace: true,
@@ -99,7 +99,7 @@ module.exports = merge(base, {
           test: /[\\/]node_modules[\\/]/,
           // 根据路径获得第三方库的名称
           // 并将抽离的chunk以"vendor_thirdPartyLibrary"格式命名
-          name: function (module, chunks, chacheGroupKey) {
+          name: (module) => {
             const packageName = module.context.match(
               /[\\/]node_modules[\\/](.*?)([\\/]|$)/
             )[1];
